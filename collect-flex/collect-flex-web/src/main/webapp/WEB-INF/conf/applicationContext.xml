@@ -178,4 +178,10 @@
 	<!-- ===================================== -->
 	<bean id="userDetailsService"	class="org.openforis.collect.security.CollectUserDetailsService" />
 	
+<!-- 	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!-- 		<property name="changeLog" value="classpath:org/openforis/collect/dbchangelog/3.0-Alpha3.xml" /> -->
+<!-- 		<property name="contexts" value="test, production" /> -->
+<!--  	</bean> -->
+	
 </beans>

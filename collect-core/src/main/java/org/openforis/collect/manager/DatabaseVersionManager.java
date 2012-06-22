@@ -3,6 +3,10 @@
  */
 package org.openforis.collect.manager;
 
+import java.net.URL;
+
+import liquibase.integration.spring.SpringLiquibase;
+
 import org.openforis.collect.Collect;
 import org.openforis.collect.model.ApplicationInfo;
 import org.openforis.collect.persistence.ApplicationInfoDao;
@@ -14,10 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class DatabaseVersionManager {
 
+	@Autowired
+	private SpringLiquibase liquibase;
+	
 	private static final String VOID_VERSION = "PROJECT_VERSION"; //token was not being replaced into version.properties in previous releases
 	
 	private static final String[] MIGRATION_VERSIONS = new String[]{
-		"3.0-Alpha2"
+		"3.0-Alpha2", "3.0-Alpha3"
 	};
 	
 	@Autowired
@@ -45,6 +52,8 @@ public class DatabaseVersionManager {
 			if ( appVersion.compareTo(lastMigrationVersion) >= 0) {
 				return true;
 			} else {
+				//URL changelogUrl = ClassLoader.getSystemResource("org/openforis/collect/dbchangelog/" + lastMigrationVersion);
+				//liquibase.setChangeLog();
 				return false;
 			}
 		}

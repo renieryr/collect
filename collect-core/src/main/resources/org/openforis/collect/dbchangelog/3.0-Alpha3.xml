@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+ 
+    <changeSet id="1" author="collect">
+    	<dropSequence sequenceName="collect.ofc_schema_definition_id_seq"/>
+    	
+    	<dropForeignKeyConstraint baseTableName="collect.ofc_record" 
+    		constraintName="ofc_record_root_entity_definition_fkey" />
+
+    	<dropForeignKeyConstraint baseTableName="collect.ofc_schema_definition" 
+    		constraintName="ofc_record_root_entity_definition_fkey" />
+
+		<dropTable tableName="collect.ofc_schema_definition" />
+		
+		<addColumn tableName="collect.ofc_record">
+			<column name="survey_id" type="integer" />
+		</addColumn>
+		
+		<addForeignKeyConstraint constraintName="ofc_record_survey_fkey" 
+			baseTableName="collect.ofc_record" baseColumnNames="survey_id" 
+			referencedTableName="collect.ofc_survey" referencedColumnNames="id"
+			/>
+        
+        <update tableName="collect.ofc_record">
+        	<column name="survey_id" value="1" />
+        </update>
+        
+        <addNotNullConstraint tableName="collect.ofc_record" columnName="survey_id"/>
+        
+    </changeSet>
+ 
+</databaseChangeLog>
